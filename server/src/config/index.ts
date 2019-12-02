@@ -23,4 +23,5 @@ class Config implements IConfig {
     }
 }
 
+export * from './config.types';
 export default Config;
