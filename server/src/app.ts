@@ -10,12 +10,14 @@ import { default as path }  from 'path';
 
 import { Environment, IConfig } from './config';
 import { ILogger } from './utilities';
+import { AppRouter } from "./routes";
 
 export default class App {
+  public app: Application;
   private config: IConfig;
   private logger: ILogger;
-  public app: Application;
-
+  public appRouter: AppRouter;
+  
   constructor (config: IConfig, logger: ILogger) {
     this.config = config;
     this.logger = logger;
@@ -25,6 +27,7 @@ export default class App {
     this.loadExpressMiddleware();
     this.loadMorganMiddleware();
     this.loadCorsMiddleware();
+    this.loadRoutes();
   }
 
   loadExpressMiddleware () {
@@ -73,5 +76,9 @@ export default class App {
       exposedHeaders: ['x-auth-token'],
     };
     this.app.use(cors(corsOptions));
+  }
+
+  loadRoutes () {
+      this.appRouter = new AppRouter(this.app);
   }
 }
