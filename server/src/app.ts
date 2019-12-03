@@ -4,6 +4,7 @@ import { default as chalk } from 'chalk';
 import { default as cookieParser } from 'cookie-parser';
 import { default as cors } from 'cors';
 import { default as helmet } from 'helmet';
+import { default as moment }  from 'moment';
 import { default as morgan }  from 'morgan';
 import { default as path }  from 'path';
 
@@ -50,16 +51,13 @@ export default class App {
     if (this.config.env === Environment.development) {
       const morganMiddleware = morgan((tokens, req, res) => {
         return [
-          '\n',
-          chalk.hex('#ff4757').bold('🍄  Morgan --> '),
-          chalk.hex('#34ace0').bold(tokens.method(req, res)),
-          chalk.hex('#ffb142').bold(tokens.status(req, res)),
-          chalk.hex('#ff5252').bold(tokens.url(req, res)),
-          chalk.hex('#2ed573').bold(`${tokens['response-time'](req, res)}  ms`),
-          chalk.hex('#f78fb3').bold(`@ ${tokens.date(req, res)}`),
-          chalk.yellow(tokens['remote-addr'](req, res)),
-          chalk.hex('#fffa65').bold(`from ${tokens.referrer(req, res)}`),
-          chalk.hex('#1e90ff')(tokens['user-agent'](req, res)),
+          chalk.hex('#ffffff').bold(`${moment(tokens.date(req, res)).format('YYYY-MM-DD hh:mm:ss')}`),
+          chalk.hex('#34ace0').bold(`[${tokens.method(req, res)}]`),
+          ':\t',
+          chalk.hex('#ff5252').bold(`[${tokens.url(req, res)}]`),
+          chalk.hex('#f78fb3').bold(`[${tokens.status(req, res)}]`),
+          chalk.hex('#fffff').bold(`${tokens['response-time'](req, res)}ms`),
+          chalk.hex('#fffff').bold(tokens['remote-addr'](req, res)),
           '',
         ].join(' ');
       }); 
