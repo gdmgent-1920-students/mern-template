@@ -1,6 +1,11 @@
 import dotenv from 'dotenv';
+import { default as Joi } from '@hapi/joi';
 
 import { Environment, IConfig, IServerConfig, ServerProtocol } from './config.types';
+
+const schema = {
+    NODE_ENV: Joi.string().valid(Environment.development, Environment.local, Environment.production, Environment.staging, Environment.test).default(Environment.development),
+}
 
 class Config implements IConfig { 
     public docs: boolean;
