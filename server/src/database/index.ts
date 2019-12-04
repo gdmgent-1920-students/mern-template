@@ -5,7 +5,7 @@ import Logger, { ILogger } from '../utilities';
 
 import { Post } from "../models";
 
-export class Database {
+export default class Database {
   private config: IConfig;
   private logger: ILogger;
   public connection: Connection;
