@@ -1,6 +1,13 @@
 import { Response, Request } from 'express';
+import { SQLDatabase } from 'src/services';
 
 export default abstract class BaseController {
+    protected sqlDatabase: SQLDatabase;
+
+    constructor (services: { sqlDatabase: SQLDatabase }) {
+        this.sqlDatabase = services.sqlDatabase;
+    }
+
     public static jsonResponse (res: Response, code: number, message: string) {
         return res.status(code).json({ message });
     }

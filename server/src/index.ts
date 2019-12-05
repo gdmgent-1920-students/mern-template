@@ -1,16 +1,16 @@
 import nodemon from 'nodemon';
 
 import Config, { Environment, IConfig } from './config';
-import Database, { Database } from './database';
-import HttpServer from './server';
+import { SQLDatabase } from './services';
+import Server from './server';
 import Logger, { ILogger } from './utilities';
 
 const config: IConfig = new Config();
 const logger: ILogger = new Logger();
 
-const database: Database = new Database(config, logger);
+const database: SQLDatabase = new SQLDatabase(config, logger);
 
-const server: HttpServer = new HttpServer(config, logger);
+const server: Server = new Server(config, logger);
 server.start();
 
 function stopAllProcesses () {

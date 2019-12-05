@@ -1,4 +1,4 @@
-import { default as express, Application } from "express";
+import { default as express } from "express";
 import { default as bodyParser } from 'body-parser';
 import { default as chalk } from 'chalk';
 import { default as cookieParser } from 'cookie-parser';
@@ -10,10 +10,10 @@ import { default as path }  from 'path';
 
 import { Environment, IConfig } from './config';
 import { ILogger } from './utilities';
-import { AppRouter } from "./routes";
+import { default as AppRouter } from "./routes";
 
 export default class App {
-  public app: Application;
+  public app: express.Application;
   private config: IConfig;
   private logger: ILogger;
   public appRouter: AppRouter;

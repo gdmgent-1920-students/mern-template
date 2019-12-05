@@ -1,13 +1,13 @@
-import { default as http, createServer, Server } from 'http';
+import { default as http, createServer } from 'http';
 
 import { IConfig } from './config';
 import { ILogger } from './utilities';
 import App from './app';
 
-export default class HttpServer {
+export default class Server {
     private config: IConfig;
     private logger: ILogger;
-    private httpServer: Server;
+    private httpServer: http.Server;
     private app: App;
 
     constructor (config: IConfig, logger: ILogger) {
@@ -33,7 +33,7 @@ export default class HttpServer {
             port: this.config.server.port,
             host: this.config.server.host
           }, (err?: Error) => {
-            this.logger.info(`Server is lisiting on ${this.config.server.host}:${this.config.server.port}`, {});
+            this.logger.info(`Server is listening on ${this.config.server.host}:${this.config.server.port}`, {});
             if (err) {
               this.logger.error(`Could not start the server on ${this.config.server.host}:${this.config.server.port}`, err);
               this.gracefulShutdown(err);

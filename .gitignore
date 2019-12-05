@@ -123,3 +123,6 @@ server/test/coverage
 
 ### Logs ###
 server/logs
+
+### Env ###
+*.env

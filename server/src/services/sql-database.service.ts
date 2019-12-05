@@ -1,11 +1,11 @@
-import { createConnection, Connection } from "typeorm";
+import { createConnection, Connection } from 'typeorm';
 
 import Config, { Environment, IConfig } from '../config';
 import Logger, { ILogger } from '../utilities';
 
 import { Post } from "../models";
 
-export default class Database {
+export default class SQLDatabase {
   private config: IConfig;
   private logger: ILogger;
   public connection: Connection;
@@ -26,5 +26,9 @@ export default class Database {
       database: "test",
       entities: [Post]
     });
+  }
+
+  public getRepository (): void {
+      
   }
 }
